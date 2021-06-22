@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint --quiet --ext .js server.js lambda.js ",
     "lint:fix": "eslint --fix --quiet --ext .js server.js lambda.js ",
-    "build": "NODE_ENV=production webpack --config webpack.config.babel.js"
+    "build": "NODE_ENV=production webpack --config webpack.config.babel.js",
+    "start-server": "node server.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",

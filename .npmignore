@@ -1,0 +1,6 @@
+examples
+.idea
+.github
+package-lock.json
+updateDependencies.sh
+*.tgz
