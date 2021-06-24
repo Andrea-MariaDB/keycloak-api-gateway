@@ -1,8 +1,9 @@
 # keycloak-api-gateway
-
+- [![Node.js 10.x, 12.x, 13.x, 14.x, 15.x CI](https://github.com/vzakharchenko/keycloak-api-gateway/actions/workflows/nodejs.yml/badge.svg)](https://github.com/vzakharchenko/keycloak-api-gateway/actions/workflows/nodejs.yml)
+- [![npm version](https://badge.fury.io/js/keycloak-api-gateway.svg)](https://badge.fury.io/js/keycloak-api-gateway)
 
 # Description
-- [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://secure.wayforpay.com/button/b719a4043d286)
+- [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://secure.wayforpay.com/button/b95af1a9b9ed3)
 
 Login flow gateway through [Keycloak](https://www.keycloak.org/) for static Web resources(bundle.js, images, pdf etc...)
 
@@ -18,6 +19,7 @@ Login flow gateway through [Keycloak](https://www.keycloak.org/) for static Web 
 # Examples
 - [Single Tenant ReactJS Application](./examples/reactJSExample)
 - [Multi-tenant  ReactJS Application with Tenant selector](./examples/multiTenantReactJSExample)
+- [Cross-tenant  ReactJS Application with Tenant selector and approval proccess](./examples/crossTenantReactJSExample)
 
 # Installation
 
@@ -102,7 +104,7 @@ example: [Single Tenant ReactJS Application](./examples/reactJSExample)
 Example: [Multi-tenant  ReactJS Application with Tenant selector](./examples/multiTenantReactJSExample)
 
 # Configuration for Cross-Tenant Application
-TODO
+[Cross-tenant  ReactJS Application with Tenant selector and approval proccess](./examples/crossTenantReactJSExample)
 
 
 # Url Protection Level
@@ -185,6 +187,10 @@ const keycloakApiGateWayAdapter = new adapter.KeycloakApiGateWayAdapter(
         ...
     }
     storageType: 'DynamoDB',
+    identityProviders: {
+        "multiTenant":"IdentityProvider Alias",
+        "singleTenant":"IdentityProvider Alias"
+      },
     storageTypeSettings: {
         tableName,
         region,
@@ -199,6 +205,9 @@ where
  - **storageType** place where store session data(user access and refresh tokens)
     - DynamoDB store in AWS DynamoDB
     - InMemoryDB store in file
+ - **identityProviders** Identity Provider Alias name.
+    - multiTenant - Identity Provider for Multitenant application. need use the same alias name between tenants. can be overridden by request parameter kc_idp_hint
+    - singleTenant - Identity Provider for application.
  - **storageTypeSettings** configuration for storageType
  - keys RSA keys which can be used for sign/verify sessionId and also can be used for "Signed JWT" client authentication
 
